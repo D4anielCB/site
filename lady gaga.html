@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infográfico da Carreira de Lady Gaga</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<6><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f0f4f8;
+    }
+    .chart-container {
+        position: relative;
+        margin: auto;
+        height: 350px;
+        width: 100%;
+        max-width: 600px;
+    }
+    .stat-card {
+        background-color: #073B4C;
+        color: white;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #FFD166;
+        line-height: 1.1;
+    }
+    .stat-label {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+        color: #E2E8F0;
+    }
+    .section-card {
+        background-color: white;
+        border-radius: 0.75rem;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        transition: box-shadow 0.3s;
+    }
+    .section-card:hover {
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    }
+    .timeline {
+        position: relative;
+        padding: 2rem 0;
+    }
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 1.5rem;
+        height: 100%;
+        width: 4px;
+        background: #118AB2;
+        border-radius: 2px;
+    }
+    .timeline-item {
+        position: relative;
+        padding-left: 4rem;
+        margin-bottom: 2rem;
+    }
+    .timeline-dot {
+        position: absolute;
+        left: calc(1.5rem - 0.75rem + 2px);
+        top: 0.25rem;
+        height: 1.5rem;
+        width: 1.5rem;
+        background: #FF6B6B;
+        border-radius: 50%;
+        border: 4px solid #118AB2;
+    }
+    .flowchart-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    .flowchart-item {
+        background-color: #f8fafc;
+        border: 2px solid #118AB2;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        text-align: center;
+        width: 80%;
+        position: relative;
+    }
+    .flowchart-arrow {
+        color: #118AB2;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body class="text-gray-800">
+
+<main class="container mx-auto p-4 md:p-8">
+    <header class="text-center mb-12">
+        <h1 class="text-4xl md:text-6xl font-bold text-[#073B4C] mb-4">Lady Gaga: Uma Odisseia Pop</h1>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Uma análise visual da carreira de um ícone que redefiniu a música, a moda e o ativismo no século XXI.</p>
+    </header>
+
+    <section id="visao-geral" class="mb-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="stat-card">
+                <div class="stat-number">14</div>
+                <div class="stat-label">Grammy Awards</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Oscar</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Globos de Ouro</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$112M+</div>
+                <div class="stat-label">Arrecadação (Chromatica Ball)</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="eras" class="space-y-12">
+        
+        <div class="section-card grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+                <h2 class="text-3xl font-bold text-[#073B4C] mb-3">A Ascensão Meteórica (2008-2010)</h2>
+                <p class="text-gray-600 mb-4">Com os álbuns <em class="font-semibold text-[#118AB2]">The Fame</em> e <em class="font-semibold text-[#118AB2]">The Fame Monster</em>, Lady Gaga explodiu no cenário global. Seus hinos electropop e estética visual arrojada estabeleceram um novo padrão para o estrelato pop. O gráfico ao lado compara o desempenho de seus primeiros singles, que dominaram as paradas mundiais e definiram o som da época.</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="fameMonsterChart"></canvas>
+            </div>
+        </div>
+
+        <div class="section-card grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+             <div class="chart-container">
+                <canvas id="bornThisWayChart"></canvas>
+            </div>
+            <div>
+                <h2 class="text-3xl font-bold text-[#073B4C] mb-3">Born This Way: Ativismo e Hinos (2011-2012)</h2>
+                <p class="text-gray-600 mb-4">Esta era marcou a transição de Gaga para um ícone cultural. O álbum <em class="font-semibold text-[#118AB2]">Born This Way</em> tornou-se um hino global de autoaceitação, especialmente para a comunidade LGBTQ+. Com vendas superiores a um milhão de cópias na primeira semana, seu impacto foi comercial e social. Nesse período, ela co-fundou a <strong class="text-[#06D6A0]">Born This Way Foundation</strong>, solidificando seu compromisso com a saúde mental e o combate ao bullying.</p>
+            </div>
+        </div>
+        
+        <div class="section-card">
+            <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-6">Reivenção Artística (2013-2017)</h2>
+            <p class="text-gray-600 text-center max-w-3xl mx-auto mb-8">Após a intensidade de <em class="font-semibold">Born This Way</em>, Gaga demonstrou sua versatilidade com uma série de projetos distintos. Esta linha do tempo destaca sua jornada camaleônica, provando seu alcance para além do pop e solidificando sua credibilidade como uma musicista completa.</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3 class="font-bold text-xl text-[#FF6B6B]">ARTPOP (2013)</h3>
+                    <p class="text-gray-600">Uma fusão experimental de arte e EDM. Embora divisivo na época, o álbum ganhou status de cult e mostrou sua ambição de quebrar barreiras.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3 class="font-bold text-xl text-[#FFD166]">Cheek to Cheek (2014)</h3>
+                    <p class="text-gray-600">Uma colaboração de jazz com o lendário Tony Bennett. O projeto foi aclamado pela crítica, rendeu um Grammy e revelou sua proeza vocal em um novo gênero.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3 class="font-bold text-xl text-[#06D6A0]">Joanne (2016)</h3>
+                    <p class="text-gray-600">Um álbum introspectivo com influências de country e soft rock. A era "pé no chão" focou em temas pessoais e autenticidade, culminando em sua performance icônica no Super Bowl.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+                <h2 class="text-3xl font-bold text-[#073B4C] mb-3">Uma Estrela Renasce (2018-2021)</h2>
+                <p class="text-gray-600 mb-4">A incursão de Gaga em Hollywood solidificou seu status como uma artista multitalentosa. Estrelando <em class="font-semibold text-[#118AB2]">A Star Is Born</em> e <em class="font-semibold text-[#118AB2]">House of Gucci</em>, ela recebeu aclamação da crítica e prêmios de prestígio, incluindo um Oscar de Melhor Canção Original por "Shallow".</p>
+                <div class="flex space-x-4 justify-center md:justify-start mt-6">
+                    <div class="text-center">
+                        <span class="text-5xl">🏆</span>
+                        <p class="font-semibold">Oscar</p>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-5xl">🏆</span>
+                        <p class="font-semibold">BAFTA</p>
+                    </div>
+                     <div class="text-center">
+                        <span class="text-5xl">🏆</span>
+                        <p class="font-semibold">Globo de Ouro</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="actingChart"></canvas>
+            </div>
+        </div>
+
+        <div class="section-card md:col-span-2">
+            <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-3">Haus of Gaga: Uma Sinfonia de Estilo</h2>
+            <p class="text-gray-600 text-center max-w-3xl mx-auto mb-8">A moda para Lady Gaga é uma forma de arte performática. Cada era musical é acompanhada por uma identidade visual meticulosamente construída, transformando sua carreira em uma galeria de inovação e vanguarda. Este fluxo visualiza a evolução de sua estética icônica.</p>
+            <div class="flowchart-container">
+                <div class="flowchart-item">
+                    <h4 class="font-bold text-[#FF6B6B]">The Fame/Monster</h4>
+                    <p>Glamour futurista, disco e o infame vestido de carne.</p>
+                </div>
+                <div class="flowchart-arrow">↓</div>
+                <div class="flowchart-item">
+                    <h4 class="font-bold text-[#FFD166]">Born This Way</h4>
+                    <p>Próteses alienígenas, estética de "Mother Monster" e alta costura gótica.</p>
+                </div>
+                 <div class="flowchart-arrow">↓</div>
+                <div class="flowchart-item">
+                    <h4 class="font-bold text-[#06D6A0]">Joanne</h4>
+                    <p>Estética Americana, chapéu de cowboy rosa e um visual "pé no chão".</p>
+                </div>
+                 <div class="flowchart-arrow">↓</div>
+                <div class="flowchart-item">
+                    <h4 class="font-bold text-[#118AB2]">Chromatica</h4>
+                    <p>Cyberpunk, rosa choque, elementos metálicos e máscaras elaboradas.</p>
+                </div>
+            </div>
+        </div>
+        
+         <div class="section-card grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+             <div class="chart-container">
+                <canvas id="mayhemChart"></canvas>
+            </div>
+            <div>
+                <h2 class="text-3xl font-bold text-[#073B4C] mb-3">O Caos Criativo Atual (2020-Presente)</h2>
+                <p class="text-gray-600 mb-4">Gaga continua a inovar. <em class="font-semibold text-[#118AB2]">Chromatica</em> foi um retorno triunfante ao dance-pop, enquanto projetos como <em class="font-semibold text-[#118AB2]">Harlequin</em> exploraram o jazz. Seu álbum mais recente, <em class="font-semibold text-[#118AB2]">MAYHEM</em>, é descrito como um "caos de gêneros", misturando influências que vão do industrial ao funk, como visualizado no gráfico de radar.</p>
+            </div>
+        </div>
+
+        <div class="section-card">
+             <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-6">Mother Monster e Seus "Fics"</h2>
+             <p class="text-gray-600 text-center max-w-3xl mx-auto mb-8">A relação de Gaga com seus "Little Monsters" é única. A cultura de fãs é rica em memes e narrativas criativas ("fics"), que demonstram o profundo engajamento e humor da comunidade. A artista frequentemente reconhece e celebra essa criatividade.</p>
+             <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200">
+                    <thead class="bg-[#073B4C] text-white">
+                        <tr>
+                            <th class="py-3 px-4 uppercase font-semibold text-sm text-left">Meme / "Fic"</th>
+                            <th class="py-3 px-4 uppercase font-semibold text-sm text-left">Origem e Significado</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr class="border-b">
+                            <td class="py-3 px-4 font-semibold text-[#FF6B6B]">"Brazil, I'm devastated"</td>
+                            <td class="py-3 px-4">Frase atribuída a Gaga, que se tornou um bordão humorístico no Brasil para expressar decepção de forma exagerada.</td>
+                        </tr>
+                        <tr class="border-b bg-gray-50">
+                            <td class="py-3 px-4 font-semibold text-[#FFD166]">"ARTPOP could mean anything"</td>
+                            <td class="py-3 px-4">Letra da música "Artpop", usada pelos fãs para defender a natureza experimental e multifacetada do álbum.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-semibold text-[#06D6A0]">"Fic de 7 de setembro"</td>
+                            <td class="py-3 px-4">Uma teoria bem-humorada, popular entre fãs brasileiros, que conecta criativamente a artista ao Dia da Independência do Brasil.</td>
+                        </tr>
+                    </tbody>
+                </table>
+             </div>
+        </div>
+
+    </section>
+</main>
+
+<footer class="text-center p-6 mt-12 bg-[#073B4C] text-gray-300">
+    <p>Infográfico criado para fins educacionais e de demonstração. Dados compilados a partir do estudo detalhado da carreira de Lady Gaga.</p>
+    <p>&copy; 2025. Todos os direitos reservados. Confirmação: NENHUM Mermaid JS ou SVG foi usado na criação deste infográfico.</p>
+</footer>
+
+<script>
+    const wrapLabel = (label, maxLength) => {
+        if (typeof label !== 'string' || label.length <= maxLength) {
+            return label;
+        }
+        const words = label.split(' ');
+        const lines = [];
+        let currentLine = '';
+        words.forEach(word => {
+            if ((currentLine + word).length > maxLength) {
+                lines.push(currentLine.trim());
+                currentLine = '';
+            }
+            currentLine += word + ' ';
+        });
+        lines.push(currentLine.trim());
+        return lines;
+    };
+
+    const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        if (Array.isArray(label)) {
+            return label.join(' ');
+        }
+        return label;
+    };
+    
+    const sharedChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#073B4C',
+                    font: {
+                       size: 14,
+                       family: "'Poppins', sans-serif"
+                    }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    title: tooltipTitleCallback
+                },
+                backgroundColor: '#073B4C',
+                titleFont: { size: 16, weight: 'bold' },
+                bodyFont: { size: 14 },
+                padding: 10,
+                cornerRadius: 5
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: { 
+                    color: '#4A5568',
+                    font: {
+                       family: "'Poppins', sans-serif"
+                    }
+                },
+                grid: {
+                    color: '#E2E8F0'
+                }
+            },
+            x: {
+                ticks: { 
+                    color: '#4A5568',
+                     font: {
+                       family: "'Poppins', sans-serif"
+                    }
+                },
+                 grid: {
+                    display: false
+                }
+            }
+        }
+    };
+
+    const energeticPlayfulPalette = ['#FF6B6B', '#FFD166', '#06D6A0', '#118AB2', '#073B4C'];
+    
+    new Chart(document.getElementById('fameMonsterChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Just Dance', 'Poker Face', 'Bad Romance', 'Telephone'],
+            datasets: [{
+                label: 'Semanas no Top 10 (Billboard Hot 100)',
+                data: [27, 20, 13, 15],
+                backgroundColor: energeticPlayfulPalette,
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        },
+        options: sharedChartOptions
+    });
+
+    new Chart(document.getElementById('bornThisWayChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Vendas na Primeira Semana (Born This Way)', 'Outras Vendas de Álbuns (Estimado até 2011)'],
+            datasets: [{
+                label: 'Impacto de Vendas',
+                data: [1108000, 15000000],
+                backgroundColor: ['#06D6A0', '#118AB2'],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top', labels: { color: '#073B4C', font: { family: "'Poppins', sans-serif" } } },
+                tooltip: {
+                    callbacks: { title: tooltipTitleCallback },
+                    backgroundColor: '#073B4C',
+                    titleFont: { size: 16, weight: 'bold' },
+                    bodyFont: { size: 14 },
+                    padding: 10,
+                    cornerRadius: 5
+                }
+            }
+        }
+    });
+    
+    new Chart(document.getElementById('actingChart'), {
+        type: 'polarArea',
+        data: {
+            labels: [
+                wrapLabel('A Star Is Born (Bilheteria)', 16), 
+                wrapLabel('House of Gucci (Bilheteria)', 16),
+                wrapLabel('American Horror Story (Aclamação Crítica)', 16)
+            ],
+            datasets: [{
+                label: 'Sucesso de Atuação',
+                data: [436, 153, 90],
+                backgroundColor: [
+                    'rgba(255, 107, 107, 0.7)',
+                    'rgba(255, 209, 102, 0.7)',
+                    'rgba(6, 214, 160, 0.7)',
+                ]
+            }]
+        },
+        options: {
+             responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { color: '#073B4C', font: { family: "'Poppins', sans-serif" } } },
+                tooltip: {
+                    callbacks: { title: tooltipTitleCallback },
+                    backgroundColor: '#073B4C',
+                    titleFont: { size: 16, weight: 'bold' },
+                    bodyFont: { size: 14 },
+                    padding: 10,
+                    cornerRadius: 5
+                }
+            },
+             scales: {
+                r: {
+                     ticks: {
+                        backdropColor: 'transparent',
+                        color: '#4A5568'
+                     },
+                     grid: {
+                         color: '#E2E8F0'
+                     }
+                }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('mayhemChart'), {
+        type: 'radar',
+        data: {
+            labels: ['Synth-pop', 'Industrial', 'Rock', 'Funk', 'Disco', 'Electro'],
+            datasets: [{
+                label: 'Influências de Gênero em "MAYHEM"',
+                data: [9, 8, 6, 7, 7, 8],
+                fill: true,
+                backgroundColor: 'rgba(17, 138, 178, 0.2)',
+                borderColor: '#118AB2',
+                pointBackgroundColor: '#118AB2',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#118AB2'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                 legend: { display: false },
+                tooltip: {
+                    callbacks: { title: tooltipTitleCallback },
+                    backgroundColor: '#073B4C',
+                    titleFont: { size: 16, weight: 'bold' },
+                    bodyFont: { size: 14 },
+                    padding: 10,
+                    cornerRadius: 5
+                }
+            },
+             scales: {
+                r: {
+                    angleLines: { color: '#E2E8F0' },
+                    grid: { color: '#E2E8F0' },
+                    pointLabels: { 
+                        color: '#073B4C',
+                         font: {
+                            size: 12,
+                            weight: 'bold',
+                            family: "'Poppins', sans-serif"
+                         }
+                    },
+                    ticks: {
+                        backdropColor: 'transparent',
+                        color: '#4A5568'
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
